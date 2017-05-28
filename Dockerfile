@@ -38,6 +38,6 @@ cd /tmp && curl -sS https://getcomposer.org/installer | php && mv composer.phar 
 
 # add apache2 service to supervisor
 #ADD supervisor/conf.d/apache2.conf /etc/supervisor/conf.d/
-EXPOSE 7000
+EXPOSE 80
 
 RUN cp /srv/openalpr/html/* /var/www/html/
