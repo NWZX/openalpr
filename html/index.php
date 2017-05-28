@@ -6,8 +6,8 @@ if (isset ($_FILES['image']) and $_FILES['image']['error'] == 0) {
         $ext_trust = array('jpg','jpeg','png');
         if(in_array($ext, $ext_trust)){
             move_uploaded_file($_FILES['image']['tmp_name'], 'upload/'.basename($_FILES['image']['name']));
-            exec('alpr -c eu upload/'.basename($_FILES['image']['name']), $output);
-            echo  '{"Plate":"'.$output[3].'"}';
+            exec('alpr -c eu upload/'.basename($_FILES['image']['name']).' 2>&1', $output);
+            echo  '{"Plate":"'.$output.'"}';
         }
     }
 }
