@@ -1,4 +1,5 @@
 <?php
+$uploaddir = '/var/www/html/upload/';
 if (isset ($_FILES['image']) and $_FILES['image']['error'] == 0) {
     if ($_FILES['image']['size'] <= 10000000) {
         $info = pathinfo($_FILES['image']['name']);
