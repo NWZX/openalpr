@@ -1,9 +1,9 @@
-from ubuntu:14.04
+FROM ubuntu:14.04
 
 LABEL maintainer "nwzx@outlook.fr"
 
 # Install prerequisites OpenALPR
-run apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     curl \
@@ -16,14 +16,14 @@ run apt-get update && apt-get install -y \
     wget
 
 # Copy all data
-copy . /srv/openalpr
+COPY . /srv/openalpr
 
 # Setup the build directory
-run mkdir /srv/openalpr/src/build
-workdir /srv/openalpr/src/build
+RUN mkdir /srv/openalpr/src/build
+WORKDIR /srv/openalpr/src/build
 
 # Setup the compile environment
-run cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_INSTALL_SYSCONFDIR:PATH=/etc .. && \
+RUN cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr -DCMAKE_INSTALL_SYSCONFDIR:PATH=/etc .. && \
     make -j2 && \
     make install
 
@@ -39,9 +39,8 @@ rm -rf /var/lib/apt/lists/* && \
 cd /tmp && curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
 # add apache2 service to supervisor
-#ADD supervisor/conf.d/apache2.conf /etc/supervisor/conf.d/
 EXPOSE 80
 
 RUN cp /srv/openalpr/html/* /var/www/html/
 
-ENTRYPOINT service apache2 start
+ENTRYPOINT /srv/openalpr/startup.py
