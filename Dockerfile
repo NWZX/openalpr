@@ -41,6 +41,8 @@ cd /tmp && curl -sS https://getcomposer.org/installer | php && mv composer.phar 
 # add apache2 service to supervisor
 EXPOSE 80
 
+RUN rm /var/www/html/*
+
 RUN cp /srv/openalpr/html/* /var/www/html/
 
 ENTRYPOINT python /srv/openalpr/startup.py
