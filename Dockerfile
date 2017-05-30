@@ -1,5 +1,7 @@
 from ubuntu:14.04
 
+LABEL maintainer "nwzx@outlook.fr"
+
 # Install prerequisites OpenALPR
 run apt-get update && apt-get install -y \
     build-essential \
