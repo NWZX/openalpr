@@ -43,4 +43,4 @@ EXPOSE 80
 
 RUN cp /srv/openalpr/html/* /var/www/html/
 
-ENTRYPOINT /srv/openalpr/startup.py
+#ENTRYPOINT /srv/openalpr/startup.py
