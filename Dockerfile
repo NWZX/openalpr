@@ -44,6 +44,7 @@ EXPOSE 80
 RUN rm /var/www/html/*
 
 RUN cp /srv/openalpr/html/* /var/www/html/ && \
-mkdir /var/www/html/upload
+mkdir /var/www/html/upload && \
+chmod 777 /var/www/html/upload
 
 ENTRYPOINT python /srv/openalpr/startup.py
